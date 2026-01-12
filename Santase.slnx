@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="Santase/Santase.vcxproj" Id="658a1f10-5556-4a55-881a-20b2eee50023" />
+</Solution>
