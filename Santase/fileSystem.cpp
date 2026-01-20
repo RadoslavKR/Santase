@@ -148,6 +148,8 @@ bool saveGame(const gameInfo& game, const char* filename) {
     saveTrickHistory(out, game.lastTrick);
     saveHistory(out, game.gameHistory, game.playedGames);
     saveSettings(out, game.setting);
+
+    out.close();
     return true;
 }
 
@@ -193,6 +195,8 @@ bool loadGame(gameInfo& game, const char* filename) {
     loadTrickHistory(in, game.lastTrick);
     loadHistory(in, game.gameHistory, game.playedGames);
     loadSettings(in, game.setting);
+
+    in.close();
 
     return true;
 }
