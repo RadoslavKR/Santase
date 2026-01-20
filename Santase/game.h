@@ -1,3 +1,3 @@
 ﻿#pragma once
-
-void startGame();
+#include "structs.h"
+void startGame(settings);

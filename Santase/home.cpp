@@ -3,22 +3,21 @@
 #include "game.h"
 
 #include "structs.h"
-#include "gameSettings.h"
 
 #include<iostream>
 #include<windows.h>
 #undef ERROR
 
-void openRules() {
+void openRules(settings setting) {
     std::cout << "Santase(66) Rules" << std::endl;
-    std ::cout << "The main objective of the game is to be the first one to score " << neededPointsToWin << " win points. "
+    std ::cout << "The main objective of the game is to be the first one to score " << setting.neededPointsToWin << " win points. "
         "You win points by winning a round. The first player to reach 66 points in a round "
         "and to declare it is the winner of the hand.\n\n"
 
         "You acquire points by winning tricks.\n\n"
 
         "Another way to acquire points is by matching pairs of Kings and Queens, which grants "
-        "you a bonus of " << marriagePoints << " or " << trumpMarriagePoints << " points once declared.\n\n"
+        "you a bonus of " << setting.marriagePoints << " or " << setting.trumpMarriagePoints << " points once declared.\n\n"
 
         "During the deal, three cards are dealt to each player, one card is turned up as a trump, "
         "followed by dealing another three cards to each player.\n\n"
@@ -36,7 +35,7 @@ void openRules() {
 
         "The exchange could occur as long as there are more than 2 cards remaining in the talon.\n\n"
 
-        << (lastTrickWins ? "The last trick wins you the round.\n\n" : "The last trick gives you +10pts.\n\n") <<
+        << (setting.lastTrickWins ? "The last trick wins you the round.\n\n" : "The last trick gives you +10pts.\n\n") <<
 
         "If a player believes that he has 66 points and declares it (only after winning a trick or "
         "after matching pairs of K and Q), the play stops immediately.\n\n"
@@ -77,15 +76,15 @@ int changeSetting(bool trueOrFalseParam) {
     }
 }
 
-void openSettings() {
+void openSettings(settings &setting) {
     while (true) {
         std::cout << "Santase(66)" << std::endl;
 
-        std::cout << "1) Target Points to win [" << neededPointsToWin << "]" << std::endl;
-        std::cout << "2) Marriage points (non-trump) [" << marriagePoints << "]" << std::endl;
-        std::cout << "3) Marriage points (trum) [" << trumpMarriagePoints << "]" << std::endl;
-        std::cout << "4) Show players' points [" << (showPoints ? "on" : "off") << "]" << std::endl;
-        std::cout << "5) Last trick wins or +10 pts [" << (lastTrickWins ? "wins" : "+10pts") << "]" << std::endl;
+        std::cout << "1) Target Points to win [" << setting.neededPointsToWin << "]" << std::endl;
+        std::cout << "2) Marriage points (non-trump) [" << setting.marriagePoints << "]" << std::endl;
+        std::cout << "3) Marriage points (trum) [" << setting.trumpMarriagePoints << "]" << std::endl;
+        std::cout << "4) Show players' points [" << (setting.showPoints ? "on" : "off") << "]" << std::endl;
+        std::cout << "5) Last trick wins or +10 pts [" << (setting.lastTrickWins ? "wins" : "+10pts") << "]" << std::endl;
 
         Command change = { "change", 5, {1, 2, 3, 4, 5} };
         Command back = { "back" };
@@ -101,31 +100,31 @@ void openSettings() {
                 std::cout << "Please write your desired target points to win" << std::endl;
                 int tmp = changeSetting(false);
                 if (tmp == -1) continue;
-                else neededPointsToWin = tmp;
+                else setting.neededPointsToWin = tmp;
             }
             else if (instruction.commandParam == 2) {
                 std::cout << "Please write your desired non-trump marriage points" << std::endl;
                 int tmp = changeSetting(false);
                 if (tmp == -1) continue;
-                else marriagePoints = tmp;
+                else setting.marriagePoints = tmp;
             }
             else if (instruction.commandParam == 3) {
                 std::cout << "Please write your desired trump marriage points" << std::endl;
                 int tmp = changeSetting(false);
                 if (tmp == -1) continue;
-                else trumpMarriagePoints = tmp;
+                else setting.trumpMarriagePoints = tmp;
             }
             else if (instruction.commandParam == 4) {
                 std::cout << "Please write 1 for 'on' or 0 for 'off' for weather to show players points" << std::endl;
                 int tmp = changeSetting(true);
                 if (tmp == -1) continue;
-                else showPoints = tmp;
+                else setting.showPoints = tmp;
             }
             else {
                 std::cout << "Please write 1 if you want the last trick to win the game or 0 if you want it to be +10pts." << std::endl;
                 int tmp = changeSetting(true);
                 if (tmp == -1) continue;
-                else lastTrickWins = tmp;
+                else setting.lastTrickWins = tmp;
             }
         }
         else return;
@@ -151,11 +150,13 @@ Instruction openMainMenu() {
 int main() {
     srand(time(nullptr));
     SetConsoleOutputCP(CP_UTF8);
+
+    settings setting;
     while (true) {
         Instruction instruction = openMainMenu();
-        if (instruction.commandId == 0) startGame();
-        else if (instruction.commandId == 1) openRules();
-        else if (instruction.commandId == 2) openSettings();
+        if (instruction.commandId == 0) startGame(setting);
+        else if (instruction.commandId == 1) openRules(setting);
+        else if (instruction.commandId == 2) openSettings(setting);
         else return 0;
     }
 }

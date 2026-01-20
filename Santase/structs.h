@@ -6,6 +6,7 @@ struct Command {
     int numOfPossibleParams = 0;
     int params[MAX_PARAM_OPTIONS];
     bool writableParam = false;
+    bool writableIsString = false;
 };
 
 struct Commands {
@@ -16,6 +17,7 @@ struct Commands {
 struct Instruction {
     int commandId = -1;
     int commandParam = -1;
+    char strParam[MAX_PARAM_LENGTH];
 };
 
 enum class cardSuit {
@@ -28,7 +30,30 @@ enum class cardSuit {
 struct card {
     int number;
     cardSuit suit;
-    int id;
+    int pts;
+};
+
+struct trickHistory {
+    card cardPlayedP1;
+    card cardPlayedP2;
+    card cardDrawnP1;
+    card cardDrawnP2;
+    int playerWhoWon;
+};
+
+struct gamesHistory {
+    int player1Points = 0;
+    int player2Points = 0;
+    int playerWhoWon = 0;
+    int wonPoints = 0;
+};
+
+struct settings {
+    int neededPointsToWin = 11;
+    int marriagePoints = 20;
+    int trumpMarriagePoints = 40;
+    bool showPoints = true;
+    bool lastTrickWins = false;
 };
 
 struct gameInfo {
@@ -46,6 +71,11 @@ struct gameInfo {
     int player2WonGamePts = 0;
     int playerTurn = 1;
     bool gameIsClosed = false;
+    int playerWhoCloedTheGame = 0;
+    trickHistory lastTrick;
+    settings setting;
+    gamesHistory gameHistory[MAX_GAMES];
+    int playedGames = 0;
 };
 
 //errors

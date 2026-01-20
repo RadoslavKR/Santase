@@ -13,6 +13,19 @@ void split(char* str, const char splitter) {
 	}
 }
 
+void strCopy(char* target, const char* src) {
+	if (target == nullptr || src == nullptr) {
+		errorHandler(ERROR::error_0);
+	}
+
+	while (*target != '\0' && *src != '\0') {
+		*target = *src;
+		target++;
+		src++;
+	}
+	*target = '\0';
+}
+
 bool strCompare(const char* str1, const char* str2) {
 	if (str1 == nullptr || str2 == nullptr) {
 		errorHandler(ERROR::error_0);
@@ -30,6 +43,10 @@ bool strCompare(const char* str1, const char* str2) {
 
 int convertStrToNum(const char* str) {
 	int num = 0;
+	if (*str == '\0') {
+		errorHandler(ERROR::error_1);
+		return -1;
+	}
 	while (*str != '\0') {
 		if (*str < '0' || *str > '9') {
 			errorHandler(ERROR::error_1);

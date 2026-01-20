@@ -11,7 +11,7 @@
 
 void renderPossibleCommands(const Commands* commands) {
     std::cout << std::endl;
-    std::cout << "Please write the name of the command above plus the desired param(the numbers in <>) if it requers to execute." << std::endl;
+    std::cout << "Please write the name of the command below, plus the desired param(the numbers in <>), if it requers it, to execute." << std::endl;
     if (commands == nullptr) {
         errorHandler(ERROR::error_0);
         return;
@@ -68,8 +68,17 @@ Instruction userInput(const Commands* possibleCommands) {
             char* inputPtr = input;
             while (*inputPtr != '\0') inputPtr++;
 
-            instruction.commandParam = convertStrToNum(inputPtr + 1);
-            if (instruction.commandParam == -1) continue;
+            if (!possibleCommands->commands[instruction.commandId].writableIsString) {
+                instruction.commandParam = convertStrToNum(inputPtr + 1);
+                if (instruction.commandParam == -1) continue;
+            }
+            else {
+                if (strCompare(inputPtr + 1, "\0")) {
+                    errorHandler(ERROR::error_1);
+                    continue;
+                }
+                strCopy(instruction.strParam, inputPtr + 1);
+            }
         }
 
         if (instruction.commandId == -1) {
@@ -77,6 +86,7 @@ Instruction userInput(const Commands* possibleCommands) {
         }
         else {
             std::cout << std::endl << std::endl;
+            std::cout << "\033[2J\033[H";
             return instruction;
         }
     }
