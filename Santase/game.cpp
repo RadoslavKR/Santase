@@ -1,4 +1,19 @@
-﻿#include "game.h"
+﻿/**
+*
+* Solution to course project # <2>
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2025/2026
+*
+* @author <Radoslav Kolev Rachkov>
+* @idnumber <6MI0600634>
+* @compiler <VC>
+*
+* <Game Logic>
+*
+*/
+
+#include "game.h"
 #include "algorithmUtils.h"
 #include "stringUtils.h"
 #include "errorHandler.h"

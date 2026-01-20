@@ -1,4 +1,19 @@
-﻿#pragma once
+﻿/**
+*
+* Solution to course project # <2>
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2025/2026
+*
+* @author <Radoslav Kolev Rachkov>
+* @idnumber <6MI0600634>
+* @compiler <VC>
+*
+* <Structs>
+*
+*/
+
+#pragma once
 #include "env.h"
 
 struct Command {

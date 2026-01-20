@@ -1,4 +1,19 @@
-﻿#pragma once
+﻿/**
+*
+* Solution to course project # <2>
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2025/2026
+*
+* @author <Radoslav Kolev Rachkov>
+* @idnumber <6MI0600634>
+* @compiler <VC>
+*
+* <Environment file with consts>
+*
+*/
+
+#pragma once
 
 const int MAX_COMMAND_LENGTH = 18;
 const int MAX_PARAM_OPTIONS = 6;

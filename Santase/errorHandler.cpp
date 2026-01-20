@@ -1,4 +1,19 @@
-﻿#include "errorHandler.h"
+﻿/**
+*
+* Solution to course project # <2>
+* Introduction to programming course
+* Faculty of Mathematics and Informatics of Sofia University
+* Winter semester 2025/2026
+*
+* @author <Radoslav Kolev Rachkov>
+* @idnumber <6MI0600634>
+* @compiler <VC>
+*
+* <Handels error messages for the use and for future programmers>
+*
+*/
+
+#include "errorHandler.h"
 #include<iostream>
 
 void errorHandler(const ERROR error) {
